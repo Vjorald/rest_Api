@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title> Front Page</title>
+    <meta charset="UTF-8">
+    <script>
+      var baseurl = "https://booksforscc.mooo.com";
+      function loadIndex(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET",baseurl + "/index",true);
+        xmlhttp.onreadystatechange = function() {
+          if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+            var greeting = xmlhttp.responseText;
+            
+            document.getElementById("mygreeting").innerHTML = greeting;
+          }
+        };
+        xmlhttp.send();
+      }
+      window.onload = function(){
+        loadIndex();
+	  }	
+    </script>
+    
+    <style>
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #7aa8b7;
+        border-radius: 6px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><div id="mygreeting"></div></h1>
+
+
+  <a class="button" href="catalog.html">Book Catalog</a>  <!--Den Link eingeben-->
+ 
+  <a class="button" href="borrow_page.html">Borrow/Return Books</a>  <!--Den Link eingeben-->
+
+  <a class="button" href="borrowed_books.html">Borrowed Books</a>  <!--Den Link eingeben-->
+
+  <a class="button" href="addBook_page.html">Add/Remove Books</a>  <!--Den Link eingeben-->
+
+  <a class="button" href="search_page.html">Search Books</a>  <!--Den Link eingeben-->
+
+	<script>
+		function myFunction(){
+			document.getElementById("mygreeting").submit();
+		}
+	</script>
+  
+  </body>
+</html>

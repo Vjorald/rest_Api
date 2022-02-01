@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .button {
+          display: inline-block;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          color: #ffffff;
+          background-color: #7aa8b7;
+          border-radius: 6px;
+          outline: none;
+        }
+      </style>
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+
+<body>
+    <H1>This is the borrow page. Please enter the book title and the number of the books you want to borrow.</H1>
+   <form id="borrowForm" method="POST">
+       <H5>Title: </H5> <input type="text" name="titel" required/>
+       <H5>Number: </H5> <input type="number" min="0"  name="number" required/>
+       <input type="submit" value="Borrow"/>
+   </form>
+
+   <p id="ausgeliehen">  </p>
+
+  <script>
+    var formBorrow = document.getElementById("borrowForm")
+
+    formBorrow.addEventListener("submit", function(e){
+
+      e.preventDefault()
+
+      const formDataBorrow = new FormData(formBorrow)
+
+      //fetch post request
+      fetch("https://booksforscc.mooo.com/borrow", {
+        method:'POST',
+        body: formDataBorrow
+        }).then(response => {response.text().then(function(text){
+            document.getElementById("ausgeliehen").innerHTML = text;
+          })})
+
+    })
+  </script>
+
+
+  <H1>Below you can give back any book you want: </H1>
+  <form id="backForm" method="POST">
+    <H5>Title: </H5> <input type="text" name="titel" required/>
+    <H5>Number: </H5> <input type="number" min="0" name="number" required/>
+    <input type="submit" value="Back"/>
+  </form>
+
+  <p id="given_back"></p>
+
+    <script>
+      var formBack = document.getElementById("backForm")
+  
+      formBack.addEventListener("submit", function(e){
+  
+        e.preventDefault()
+  
+        var formDataBack = new FormData(formBack)
+  
+        //fetch post request
+        fetch("https://booksforscc.mooo.com/give_back", {
+          method:'POST',
+          body: formDataBack
+          }).then(response => {response.text().then(function(text){
+            document.getElementById("given_back").innerHTML = text;
+          })})
+       
+      })
+    </script>
+
+   <a class="button" href="index.html">Frontpage</a> <!--Den Link eingeben-->
+
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6d5a8d5dbb16267d',m:'H1Gv_7esyibwlDwKcM5XhgSfaxdDPbyAAyb1Mp7Mk_Y-1643544156-0-AbE1q7wCksZHqnJKWAHf6Nj8SqMfcnPDq5HkN7NwElq9rWAavVa2/IVwdO4X59omIcVB8YZ70Yb+6O19iHfx5gFyAsZfFqm5AmpuVK+sAVl7436FvgDx/vcN83+zY+0JX1TBiTpooA1NbW3qf+hBdfH374fTjYCPZAVk7aQlFQA5cZTa777D3dEpRtJ3yaoh3SoLnrtwDolxSEintDL940s=',s:[0x1e92f3f896,0x9bc64f9841],}})();</script></body>

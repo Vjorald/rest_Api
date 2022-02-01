@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<style>
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #7aa8b7;
+    border-radius: 6px;
+    outline: none;
+  }
+</style>
+</head>
+
+<body>
+    <H1>This is the search page. Please write a term of the book you want to search!</H1>
+
+    <form id="searchForm" method="POST">
+        <input type="TEXT" name="searchTerm" required>
+        <input type="submit" value="Search!">
+    </form>
+    
+    <div id="search"> </div>
+
+    <script>
+      var formBorrow = document.getElementById("searchForm")
+  
+      formBorrow.addEventListener("submit", function(e){
+  
+        e.preventDefault()
+  
+        const formDataBorrow = new FormData(formBorrow)
+  
+        //fetch post request
+        fetch("https://booksforscc.mooo.com/books/search", {
+          method:'POST',
+          body: formDataBorrow
+          }).then(response => {response.text().then(function(text){
+              document.getElementById("search").innerHTML = text;
+            })})
+  
+      })
+    </script>
+    <a class="button" href="index.html">Frontpage</a> <!--Den Link eingeben-->
+    <a class="button" href="catalog.html">Book Catalog</a> <!--Den Link eingeben-->
+    
+</body>
+</html>
